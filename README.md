@@ -1,1 +1,1096 @@
 # CROWDIT2026_tim-2-Asvocs-2
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sora Budaya Nusantara - Edukasi Budaya Indonesia</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- CSS VARIABLES & THEMES --- */
+        :root {
+            --bg-primary: #F9F6F0; /* Cream/Putih Museum */
+            --bg-secondary: #FFFFFF;
+            --text-main: #3E2723; /* Coklat Tanah Gelap */
+            --text-muted: #795548;
+            --primary: #B22222; /* Merah Marun/Etnik */
+            --accent: #D4AF37; /* Emas */
+            --card-shadow: 0 10px 30px rgba(74, 53, 37, 0.08);
+            --transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #120E0B; /* Hitam Arang/Coklat Sangat Tua */
+            --bg-secondary: #1C1713;
+            --text-main: #F5EBE6;
+            --text-muted: #D7CCC8;
+            --primary: #FF4D4D;
+            --accent: #FFD700;
+            --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        /* --- BASE STYLES --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            transition: var(--transition);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, .font-serif {
+            font-family: 'Marcellus', serif;
+        }
+
+        button, input, select {
+            font-family: inherit;
+        }
+
+        /* --- NAVBAR --- */
+        header {
+            position: sticky;
+            top: 0;
+            background-color: var(--bg-secondary);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: 2px solid var(--text-muted);
+            color: var(--text-main);
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: var(--transition);
+        }
+
+        .theme-toggle:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        /* --- HERO SECTION --- */
+        #hero {
+            padding: 6rem 5% 4rem 5%;
+            text-align: center;
+            background: linear-gradient(to bottom, var(--bg-secondary), var(--bg-primary));
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 6px 16px;
+            background-color: rgba(178, 34, 34, 0.1);
+            color: var(--primary);
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        #hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-main);
+            line-height: 1.2;
+        }
+
+        #hero p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto 2.5rem auto;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 14px 35px;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(178, 34, 34, 0.3);
+            transition: var(--transition);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(178, 34, 34, 0.5);
+            background-color: var(--accent);
+        }
+
+        /* --- PREVIEW POPULER --- */
+        .preview-section {
+            padding: 2rem 5% 4rem 5%;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 3px;
+            background-color: var(--accent);
+            margin: 10px auto 0 auto;
+        }
+
+        .grid-preview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        .provinsi-card {
+            background-color: var(--bg-secondary);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            cursor: pointer;
+            transition: var(--transition);
+            border: 1px solid rgba(0,0,0,0.03);
+        }
+
+        .provinsi-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .card-img {
+            height: 180px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .card-img::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left:0; right: 0; top:0;
+            background: linear-gradient(to top, rgba(0,0,0,0.6), transparent);
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        .card-body h3 {
+            color: var(--text-main);
+            margin-bottom: 8px;
+        }
+
+        .card-body p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+
+        /* --- EXPLORE DASHBOARD --- */
+        #explore-area {
+            display: none; /* Muncul saat klik Mulai Jelajah */
+            padding: 2rem 5%;
+            min-height: 100vh;
+        }
+
+        .dashboard-layout {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 40px;
+        }
+
+        /* --- SIDEBAR / PANEL PILIH --- */
+        .sidebar {
+            background-color: var(--bg-secondary);
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: var(--card-shadow);
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 12px 15px;
+            border-radius: 10px;
+            border: 1px solid var(--text-muted);
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            margin-bottom: 20px;
+            outline: none;
+        }
+
+        .provinsi-list {
+            list-style: none;
+            max-height: 400px;
+            overflow-y: auto;
+            padding-right: 5px;
+        }
+
+        .provinsi-list::-webkit-scrollbar {
+            width: 5px;
+        }
+        .provinsi-list::-webkit-scrollbar-thumb {
+            background: var(--text-muted);
+            border-radius: 10px;
+        }
+
+        .provinsi-item {
+            padding: 12px 15px;
+            margin-bottom: 8px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .provinsi-item:hover, .provinsi-item.active {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        /* Mobile Dropdown (Hanya muncul di layar kecil) */
+        .mobile-select-wrapper {
+            display: none;
+            margin-bottom: 20px;
+        }
+
+        .mobile-select {
+            width: 100%;
+            padding: 15px;
+            border-radius: 10px;
+            background-color: var(--bg-secondary);
+            color: var(--text-main);
+            font-size: 1rem;
+            font-weight: bold;
+            border: 2px solid var(--primary);
+        }
+
+        /* --- CONTENT DISPLAY AREA --- */
+        .main-content {
+            animation: fadeIn 0.6s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .active-provinsi-title {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        .active-provinsi-meta {
+            font-size: 1.1rem;
+            color: var(--accent);
+            margin-bottom: 2rem;
+            font-weight: 600;
+        }
+
+        /* Tabs / Sub-nav Konten */
+        .content-tabs {
+            display: flex;
+            gap: 10px;
+            border-bottom: 2px solid rgba(0,0,0,0.05);
+            margin-bottom: 2rem;
+            overflow-x: auto;
+            padding-bottom: 10px;
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            cursor: pointer;
+            white-space: nowrap;
+            transition: var(--transition);
+            border-radius: 5px;
+        }
+
+        .tab-btn.active {
+            color: var(--primary);
+            background-color: rgba(178, 34, 34, 0.08);
+        }
+
+        .content-pane {
+            display: none;
+        }
+
+        .content-pane.active {
+            display: block;
+            animation: fadeIn 0.4s ease;
+        }
+
+        /* Artikel Style */
+        .article-card {
+            background-color: var(--bg-secondary);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: var(--card-shadow);
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+
+        .article-card h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        /* Galeri Grid */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .gallery-item {
+            background-color: var(--bg-secondary);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.03);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+
+        .gallery-desc {
+            padding: 12px;
+            font-size: 0.9rem;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        /* Video Section */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: var(--card-shadow);
+            margin-bottom: 15px;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            border: none;
+        }
+
+        /* Audio Player */
+        .audio-card {
+            background-color: var(--bg-secondary);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: var(--card-shadow);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .audio-info h4 {
+            font-size: 1.3rem;
+            color: var(--primary);
+        }
+
+        .audio-controls {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .play-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+
+        .play-btn:hover {
+            background-color: var(--accent);
+        }
+
+        /* --- LIGHTBOX MODAL --- */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.9);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding: 20px;
+        }
+
+        .lightbox img {
+            max-width: 90%;
+            max-height: 80%;
+            border-radius: 8px;
+            box-shadow: 0 0 30px rgba(0,0,0,0.5);
+        }
+
+        .lightbox-caption {
+            color: white;
+            margin-top: 15px;
+            font-size: 1.2rem;
+            text-align: center;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 25px; right: 35px;
+            color: white;
+            font-size: 2.5rem;
+            cursor: pointer;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            text-align: center;
+            padding: 3rem;
+            background-color: var(--bg-secondary);
+            color: var(--text-muted);
+            border-top: 1px solid rgba(0,0,0,0.05);
+            margin-top: 4rem;
+            font-weight: 500;
+        }
+
+        /* --- RESPONSIVE BREAKPOINTS --- */
+        @media (max-width: 992px) {
+            #hero h1 { font-size: 2.5rem; }
+            .dashboard-layout {
+                grid-template-columns: 1fr;
+            }
+            .sidebar {
+                display: none; /* Ganti ke dropdown di mobile */
+            }
+            .mobile-select-wrapper {
+                display: block;
+            }
+        }
+
+        @media (max-width: 600px) {
+            header {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+            }
+            #hero { padding: 4rem 5% 2rem 5%; }
+            #hero h1 { font-size: 2rem; }
+            .article-card { padding: 20px; }
+            .audio-card { flex-direction: column; text-align: center; }
+        }
+    </style>
+</head>
+<body data-theme="light">
+
+    <header>
+        <div class="logo">🏛️ Sora<span>Budaya</span></div>
+        <div class="nav-actions">
+            <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">🌙 Mode Gelap</button>
+        </div>
+    </header>
+
+    <section id="hero">
+        <span class="hero-badge">Gerbang Edukasi Budaya Interaktif</span>
+        <h1>Sora Budaya Nusantara</h1>
+        <p>Jelajahi keindahan sejarah, tradisi adat, pakaian, rumah filosofis, serta mahakarya seni audio visual dari berbagai provinsi di Indonesia.</p>
+        <button class="btn-primary" onclick="startExplore()">Mulai Jelajah ➔</button>
+    </section>
+
+    <section class="preview-section" id="preview-area">
+        <h2 class="section-title">Destinasi Budaya Populer</h2>
+        <div class="grid-preview">
+            <div class="provinsi-card" onclick="selectPopular('Jawa Barat')">
+                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1590515152281-cb729b439c36?auto=format&fit=crop&w=500&q=80')"></div>
+                <div class="card-body">
+                    <h3>Jawa Barat</h3>
+                    <p>Bumi Pasundan yang kaya akan harmoni angklung, tari merak yang anggun, serta filosofi silih asih.</p>
+                </div>
+            </div>
+            <div class="provinsi-card" onclick="selectPopular('Yogyakarta')">
+                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1604999333679-b86d54738315?auto=format&fit=crop&w=500&q=80')"></div>
+                <div class="card-body">
+                    <h3>Yogyakarta</h3>
+                    <p>Kota budaya bersejarah tinggi dengan warisan Keraton, kesenian batik, dan keagungan Gamelan.</p>
+                </div>
+            </div>
+            <div class="provinsi-card" onclick="selectPopular('Bali')">
+                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=500&q=80')"></div>
+                <div class="card-body">
+                    <h3>Bali</h3>
+                    <p>Pulau Dewata dengan magnet mistis Tari Kecak, arsitektur Pura Hindu yang megah, serta tradisi subak.</p>
+                </div>
+            </div>
+            <div class="provinsi-card" onclick="selectPopular('Sumatera Barat')">
+                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1626847037657-fd3622613ce3?auto=format&fit=crop&w=500&q=80')"></div>
+                <div class="card-body">
+                    <h3>Sumatera Barat</h3>
+                    <p>Ranah Minang yang memesona lewat Rumah Gadang, keunikan Tari Piring, dan sistem kekerabatan Matrilinial.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="explore-area">
+        
+        <div class="mobile-select-wrapper">
+            <select class="mobile-select" id="mobileProvSelect" onchange="switchProvinsi(this.value)">
+                </select>
+        </div>
+
+        <div class="dashboard-layout">
+            
+            <aside class="sidebar">
+                <input type="text" class="search-box" id="searchBar" placeholder="🔍 Cari Provinsi..." onkeyup="filterProvinces()">
+                <ul class="provinsi-list" id="provList">
+                    </ul>
+            </aside>
+
+            <main class="main-content">
+                <h2 class="active-provinsi-title" id="provTitle">Aceh</h2>
+                <p class="active-provinsi-meta" id="provMeta">Wilayah Bagian Barat Indonesia</p>
+
+                <div class="content-tabs">
+                    <button class="tab-btn active" onclick="switchTab(event, 'artikel')">📖 Artikel Budaya</button>
+                    <button class="tab-btn" onclick="switchTab(event, 'galeri')">🖼️ Galeri Gambar</button>
+                    <button class="tab-btn" onclick="switchTab(event, 'video')">🎥 Video Budaya</button>
+                    <button class="tab-btn" onclick="switchTab(event, 'musik')">🎵 Musik Daerah</button>
+                </div>
+
+                <div id="artikel" class="content-pane active">
+                    <div class="article-card">
+                        <h3>Sejarah Budaya Daerah</h3>
+                        <p id="txt-sejarah">Memuat sejarah...</p>
+                        
+                        <h3>Tradisi dan Adat Istiadat</h3>
+                        <p id="txt-tradisi">Memuat tradisi...</p>
+                        
+                        <h3>Pakaian Adat</h3>
+                        <p id="txt-pakaian">Memuat pakaian adat...</p>
+                        
+                        <h3>Rumah Adat</h3>
+                        <p id="txt-rumah">Memuat rumah adat...</p>
+                        
+                        <h3>Filosofi Budaya</h3>
+                        <p id="txt-filosofi">Memuat filosofi budaya...</p>
+                    </div>
+                </div>
+
+                <div id="galeri" class="content-pane">
+                    <div class="gallery-grid" id="galleryGrid">
+                        </div>
+                </div>
+
+                <div id="video" class="content-pane">
+                    <div class="video-container">
+                        <iframe id="videoPlayer" src="" allowfullscreen></iframe>
+                    </div>
+                    <p style="font-weight: 600; text-align: center; color: var(--text-muted);" id="videoDesc">Video Kesenian</p>
+                </div>
+
+                <div id="musik" class="content-pane">
+                    <div class="audio-card">
+                        <div class="audio-info">
+                            <h4 id="audioTitle">Nama Lagu</h4>
+                            <p id="audioOrigin">Asal Provinsi</p>
+                        </div>
+                        <div class="audio-controls">
+                            <audio id="mainAudio" src=""></audio>
+                            <button class="play-btn" onclick="toggleAudio()" id="playBtn">▶ Play</button>
+                        </div>
+                    </div>
+                </div>
+
+            </main>
+        </div>
+    </section>
+
+    <div class="lightbox" id="lightboxModal">
+        <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+        <img id="lightboxImg" src="" alt="Enlarged Visual">
+        <div class="lightbox-caption" id="lightboxCaption">Deskripsi Gambar</div>
+    </div>
+
+    <footer>
+        <p>© 2026 Sora Budaya Nusantara. Dibuat dengan 🤍 untuk Edukasi Indonesia Berkelanjutan.</p>
+    </footer>
+
+    <script>
+        // DATA MASTER KONTEN MULTIMEDIA 12 PROVINSI
+        const budayaData = {
+            "Aceh": {
+                meta: "Serambi Mekkah",
+                sejarah: "Aceh memiliki sejarah panjang sebagai salah satu pusat perdagangan internasional di nusantara. Dipengaruhi kuat oleh kebudayaan Islam dari pedagang Arab, Persia, dan India.",
+                tradisi: "Upacara Peusijuek (prosesi adat memohon keselamatan/keberkahan dalam mengawali suatu hal penting).",
+                pakaian: "Ulee Balang (pakaian adat bangsawan, pria menggunakan linto baro, wanita menggunakan dara baro).",
+                rumah: "Rumoh Aceh (panggung kayu tinggi berlunas simetris, tahan gempa bumi).",
+                filosofi: "Hukum adat bersendikan syariat Islam, tercermin dalam pepatah 'Adat bak Po Teumeureuhom, Hukom bak Syiah Kuala'.",
+                video: "https://www.youtube.com/embed/gU9G7m03j_g", // Contoh Tari Saman
+                videoTitle: "Pesona Pertunjukan Kolosal Tari Saman Aceh",
+                laguUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3", // Demo file audio gratis
+                laguJudul: "Bungong Jeumpa",
+                galeri: [
+                    {img: "https://images.unsplash.com/photo-1562447470-3665a044db0a?auto=format&fit=crop&w=400&q=80", title: "Rumoh Aceh Suku Asli"},
+                    {img: "https://images.unsplash.com/photo-1599839343343-6df7be0357f0?auto=format&fit=crop&w=400&q=80", title: "Kostum Busana Ulee Balang"},
+                    {img: "https://images.unsplash.com/photo-1547841243-eacb14453cd9?auto=format&fit=crop&w=400&q=80", title: "Seni Tari Saman Gayo"},
+                    {img: "https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?auto=format&fit=crop&w=400&q=80", title: "Instrumen Musik Rapai Aceh"}
+                ]
+            },
+            "Sumatera Utara": {
+                meta: "Tanah Ulos & Danau Toba",
+                sejarah: "Sejarah terbentuk dari perpaduan rumpun suku Batak, Melayu Pesisir, dan Nias dengan kerajaan-kerajaan kuno yang mandiri.",
+                tradisi: "Lompat Batu Fahombo di Pulau Nias (ritual pendewasaan pemuda desa).",
+                pakaian: "Kain Ulos (kain tenun sakral simbol kehangatan dan restu kehidupan).",
+                rumah: "Rumah Bolon (rumah besar adat Batak Toba berbentuk melengkung menyerupai perahu).",
+                filosofi: "Dalihan Na Tolu (fondasi relasi sosial kekerabatan Batak: Somba Marhula-hula, Elek Marboru, Manat Mardongan Tubu).",
+                video: "https://www.youtube.com/embed/w8U7F5g1nUI", 
+                videoTitle: "Ritual Adat Tortor Danau Toba",
+                laguUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
+                laguJudul: "Sinanggar Tulo",
+                galeri: [
+                    {img: "https://images.unsplash.com/photo-1616423641454-eb94efb70f03?auto=format&fit=crop&w=400&q=80", title: "Megahnya Arsitektur Rumah Bolon"},
+                    {img: "https://images.unsplash.com/photo-1588668214407-6ea9a6d8c27e?auto=format&fit=crop&w=400&q=80", title: "Tenun Ulos Khas Toba"},
+                    {img: "https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=400&q=80", title: "Seni Tari Tortor Purba"},
+                    {img: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=400&q=80", title: "Gendang Sisibah Batak"}
+                ]
+            },
+            "Sumatera Barat": {
+                meta: "Ranah Minang",
+                sejarah: "Berpusat pada peradaban Kerajaan Pagaruyung yang memadukan tatanan adat luhur asli dengan pengaruh Islam.",
+                tradisi: "Makan Bajamba (tradisi makan bersama duduk bersila dalam satu wadah besar untuk mempererat persaudaraan).",
+                pakaian: "Bundo Kanduang / Limpapeh Rumah Nan Gadang (pakaian kehormatan wanita Minang).",
+                rumah: "Rumah Gadang (atap melengkung runcing seperti tanduk kerbau bernama Gonjong).",
+                filosofi: "Adat Basandi Syarak, Syarak Basandi Kitabullah (Adat berlandaskan agama, agama berlandaskan Al-Qur'an).",
+                video: "https://www.youtube.com/embed/5U7C3t_f-bY",
+                videoTitle: "Atraksi Tari Piring Minangkabau",
+                laguUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3",
+                laguJudul: "Ayam Den Lapeh",
+                galeri: [
+                    {img: "https://images.unsplash.com/photo-1626847037657-fd3622613ce3?auto=format&fit=crop&w=400&q=80", title: "Atap Gonjong Rumah Gadang"},
+                    {img: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=400&q=80", title: "Baju Adat Pengantin Minang"},
+                    {img: "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=400&q=80", title: "Pertunjukan Tari Piring"},
+                    {img: "https://images.unsplash.com/photo-1465847899084-d164df4dedc6?auto=format&fit=crop&w=400&q=80", title: "Alat Musik Talempong Pacik"}
+                ]
+            },
+            "Jawa Barat": {
+                meta: "Bumi Pasundan",
+                sejarah: "Berakar kuat dari peninggalan Kerajaan Sunda dan Galuh, membentuk karakter masyarakat yang ramah dan harmonis dengan alam.",
+                tradisi: "Seren Taun (upacara syukur panen padi masyarakat agraris Sunda Wiwitan).",
+                pakaian: "Kebaya Sunda (anggun transparan dengan kain batik) dan Beskap formal untuk pria.",
+                rumah: "Rumah Julang Ngapak / Imah Badak Heuay (arsitektur atap menyerupai sayap burung julang).",
+                filosofi: "Silih Asih, Silih Asah, Silih Asuh (Saling mencintai, saling mencerdaskan, saling menjaga satu sama lain).",
+                video: "https://www.youtube.com/embed/gI7N3p_z0B8",
+                videoTitle: "Harmonika Orkestra Angklung Saung Udjo",
+                laguUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3",
+                laguJudul: "Es Lilin / Manuk Dadali",
+                galeri: [
+                    {img: "https://images.unsplash.com/photo-1590515152281-cb729b439c36?auto=format&fit=crop&w=400&q=80", title: "Arsitektur Kampung Adat Sunda"},
+                    {img: "https://images.unsplash.com/photo-1576016770956-debb63d900ee?auto=format&fit=crop&w=400&q=80", title: "Kebaya Tradisional Pasundan"},
+                    {img: "https://images.unsplash.com/photo-1509114397022-ed747cca3f65?auto=format&fit=crop&w=400&q=80", title: "Tari Merak Cantik Jabar"},
+                    {img: "https://images.unsplash.com/photo-1601042879364-f3947d3f9c16?auto=format&fit=crop&w=400&q=80", title: "Alat Musik Bambu Angklung"}
+                ]
+            },
+            "Jawa Tengah": {
+                meta: "Jantung Kebudayaan Jawa",
+                sejarah: "Pusat pemerintahan dinasti Mataram Islam yang memancarkan tata krama, bahasa halus, dan heritabilitas tinggi.",
+                tradisi: "Ruwatan (upacara pembersihan/pembebasan manusia dari kesialan malapetaka).",
+                pakaian: "Jawi Jangkep (pria menggunakan keris belakang) dan Kebaya Beludru Surakarta.",
+                rumah: "Rumah Joglo (atap tengah menjulang tinggi bersoko guru kokoh).",
+                filosofi: "Memayu Hayuning Bawana (Memperindah dan menjaga keselamatan alam semesta).",
+                video: "https://www.youtube.com/embed/v9iCH9_2h10",
+                videoTitle: "Wayang Kulit Klasik Jawa Tengah",
+                laguUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3",
+                laguJudul: "Gundul Pacul",
+                galeri: [
+                    {img: "https://images.unsplash.com/photo-1596402184320-417e7178b2cd?auto=format&fit=crop&w=400&q=80", title: "Struktur Agung Rumah Joglo"},
+                    {img: "https://images.unsplash.com/photo-1617540026772-23cf0a1c13d7?auto=format&fit=crop&w=400&q=80", title: "Kain Batik Tulis Tradisional"},
+                    {img: "https://images.unsplash.com/photo-1566737236500-c8ac43014a67?auto=format&fit=crop&w=400&q=80", title: "Seni Tari Gambyong Mangkunegaran"},
+                    {img: "https://images.unsplash.com/photo-1599940824399-b87987ceb72a?auto=format&fit=crop&w=400&q=80", title: "Seperangkat Gamelan Perunggu"}
+                ]
+            },
+            "Yogyakarta": {
+                meta: "Kota Istana Kraton",
+                sejarah: "Daerah Istimewa yang mempertahankan otoritas kesultanan sejak Perjanjian Giyanti 1755 hingga masa revolusi kemerdekaan RI.",
+                tradisi: "Grebeg Syawal (arak-arakan gunungan hasil bumi dari keraton untuk rakyat).",
+                pakaian: "Kebaya Tangkepan dan Sorjan Motif Lurik Estetik.",
+                rumah: "Bangsal Kencono (Keraton Yogyakarta - perpaduan Joglo filosofis spiritual tinggi).",
+                filosofi: "Manunggaling Kawula Gusti (Bersatunya rakyat dengan pemimpin serta manusia dengan Sang Pencipta).",
+                video: "https://www.youtube.com/embed/p17i8o_1Yoo",
+                videoTitle: "Tari Bedhaya Ketawang Sakral",
+                laguUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3",
+                laguJudul: "Suwe Ora Jamu",
+                galeri: [
+                    {img: "https://images.unsplash.com/photo-1604999333679-b86d54738315?auto=format&fit=crop&w=400&q=80", title: "Kompleks Bangsal Keraton Jogja"},
+                    {img: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=400&q=80", title: "Abdi Dalem Berbaju Sorjan"},
+                    {img: "https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?auto=format&fit=crop&w=400&q=80", title: "Seni Wayang Wong Mataraman"},
+                    {img: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=400&q=80", title: "Bonang Gamelan Kraton"}
+                ]
+            },
+            "Jawa Timur": {
+                meta: "Gerbang Kerajaan Majapahit",
+                sejarah: "Pewaris langsung kejayaan Singasari dan Majapahit, melahirkan asimilasi budaya yang tegas, lugas, dan berjiwa ksatria.",
+                tradisi: "Kasada suku Tengger di Gunung Bromo (melempar sesaji ke kawah gunung sakral).",
+                pakaian: "Pesa'an (pakaian longgar garis merah-putih khas Madura yang melambangkan keberanian).",
+                rumah: "Joglo Situbondo (minimalis fungsional berbahan kayu jati pilihan).",
+                filosofi: "Semangat gotong royong egaliter tanpa sekat kasta sosial (Bhinneka Tunggal Ika lahir di bumi Jawa Timur).",
+                video: "https://www.youtube.com/embed/L1Zz6D8-1wM",
+                videoTitle: "Atraksi Mistis Reog Ponorogo Singo Barong",
+                laguUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-7.mp3",
+                laguJudul: "Rek Ayo Rek",
+                galeri: [
+                    {img: "https://images.unsplash.com/photo-1583212292454-1fe6229603b7?auto=format&fit=crop&w=400&q=80", title: "Joglo Situbondo Pesisir"},
+                    {img: "https://images.unsplash.com/photo-1561488111-5d800fd56b8a?auto=format&fit=crop&w=400&q=80", title: "Busana Pesa'an Garis Madura"},
+                    {img: "https://images.unsplash.com/photo-1603566580665-6617a26f30db?auto=format&fit=crop&w=400&q=80", title: "Dahsyatnya Topeng Reog Ponorogo"},
+                    {img: "https://images.unsplash.com/photo-1464375117522-1311d6a5b81f?auto=format&fit=crop&w=400&q=80", title: "Kesenian Musik patrol Sidoarjo"}
+                ]
+            },
+            "Bali": {
+                meta: "Pulau Dewata",
+                sejarah: "Kebudayaan Bali berkembang pesat sejak runtuhnya Majapahit, berbaur indah dengan Hinduisme lokal menciptakan tata seni tinggi.",
+                tradisi: "Ngaben (upacara pembakaran jenazah suci untuk melepaskan jiwa menuju alam moksa).",
+                pakaian: "Payas Agung (pakaian kemegahan kerajaan penuh mahkota emas cerah).",
+                rumah: "Gapura Candi Bentar (arsitektur gerbang simetris penyeimbang energi kosmik).",
+                filosofi: "Tri Hita Karana (Tiga hubungan harmonis: manusia dengan Tuhan, manusia dengan alam, manusia dengan sesama).",
+                video: "https://www.youtube.com/embed/Z0V2yXgZ4r0",
+                videoTitle: "Magis Dinamis Pertunjukan Tari Kecak Uluwatu",
+                laguUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3",
+                laguJudul: "Macepet-cepetan",
+                galeri: [
+                    {img: "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=400&q=80", title: "Gerbang Agung Candi Bentar"},
+                    {img: "https://images.unsplash.com/photo-1555400038-63f5ba517a4a?auto=format&fit=crop&w=400&q=80", title: "Detail Pakaian Adat Payas Bali"},
+                    {img: "https://images.unsplash.com/photo-1542856391-010fb87dcfed?auto=format&fit=crop&w=400&q=80", title: "Penari Tari Legong Ayu"},
+                    {img: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=400&q=80", title: "Rindik Bambu Khas Gianyar"}
+                ]
+            },
+            "NTB / NTT": {
+                meta: "Flobamora & Bumi Gora",
+                sejarah: "Kawasan kepulauan eksotis dengan sejarah kesultanan Islam di Sumbawa dan jaringan tribal adat megalitikum di Flores.",
+                tradisi: "Pasola di Sumba (kegiatan perang ketangkasan berkuda melempar tombak kayu kayu).",
+                pakaian: "Kain Tenun Ikat Sasak / Ikat Sumba (motif geometris alam purba).",
+                rumah: "Mbaru Niang (rumah kerucut 5 lantai yang sangat langka di Wae Rebo NTT).",
+                filosofi: "Keseimbangan ekologi laut dan darat, menghormati leluhur penjaga mata air alam.",
+                video: "https://www.youtube.com/embed/5D3x8w0696I",
+                videoTitle: "Eksotika Dentingan Musik Sasando Alor",
+                laguUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-9.mp3",
+                laguJudul: "Anak Kambing Saya",
+                galeri: [
+                    {img: "https://images.unsplash.com/photo-1516690561799-46d8f74f9abf?auto=format&fit=crop&w=400&q=80", title: "Mbaru Niang Wae Rebo NTT"},
+                    {img: "https://images.unsplash.com/photo-1506157786151-b8491531f063?auto=format&fit=crop&w=400&q=80", title: "Pembuatan Tenun Sumba Kuno"},
+                    {img: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?auto=format&fit=crop&w=400&q=80", title: "Tari Caci Ksatria Manggarai"},
+                    {img: "https://images.unsplash.com/photo-1459749411175-04bf5292ceea?auto=format&fit=crop&w=400&q=80", title: "Sasando Dawai Bambu Rote"}
+                ]
+            },
+            "Kalimantan": {
+                meta: "Borneo - Ranah Dayak Melayu",
+                sejarah: "Sejarah ditandai Kerajaan Hindu tertua (Kutai Kartanegara) berpadu harmonis dengan peradaban rimba suku Dayak pedalaman.",
+                tradisi: "Nyadahin / Gawai Dayak (pesta panen raya ucapan syukur kepada Sang Pencipta Jubata).",
+                pakaian: "King Baba (pria) dan King Bibinge (wanita) terbuat dari kulit kayu tanaman ampuro.",
+                rumah: "Rumah Radakng / Rumah Betang (rumah panggung kayu ulin raksasa panjang ratusan meter).",
+                filosofi: "Belom Bahadat (Hidup beradat, menghargai sesama manusia dan pohon-pohon rimba hujan tropis).",
+                video: "https://www.youtube.com/embed/Fw6oZ8l8gCc",
+                videoTitle: "Petikan Sape Alunan Syahdu Hutan Borneo",
+                laguUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-10.mp3",
+                laguJudul: "Ampar-Ampar Pisang",
+                galeri: [
+                    {img: "https://images.unsplash.com/photo-1619551468132-7a70a8d6722d?auto=format&fit=crop&w=400&q=80", title: "Rumah Betang Panjang Ulin"},
+                    {img: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=400&q=80", title: "Rompi Kulit Kayu King Baba"},
+                    {img: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=400&q=80", title: "Tari Mandau Dayak Berani"},
+                    {img: "https://images.unsplash.com/photo-1511379938547-c1f69419868d?auto=format&fit=crop&w=400&q=80", title: "Instrumen Dawai Sape Suku Dayak"}
+                ]
+            },
+            "Sulawesi": {
+                meta: "Pelaut Ulung Celebes",
+                sejarah: "Identik dengan kejayaan Kesultanan Gowa Tallo, tradisi maritim kapal pinisi Bugis, serta adat kematian megah Tana Toraja.",
+                tradisi: "Rambu Solo di Toraja (upacara pemakaman adat masif berhari-hari).",
+                pakaian: "Baju Bodo (busana wanita Bugis-Makassar berbentuk segi empat tipis bergeometri longgar).",
+                rumah: "Tongkonan (rumah adat Toraja dengan atap menjulang melengkung bak perahu atau tanduk kerbau).",
+                filosofi: "Siri' Na Pesse (Menjaga harga diri kesatria yang teguh disertai rasa empati kepedulian sosial tinggi).",
+                video: "https://www.youtube.com/embed/0x-fS3D64mY",
+                videoTitle: "Keajaiban Arsitektur Tongkonan & Ritual Toraja",
+                laguUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-11.mp3",
+                laguJudul: "Angin Mamiri",
+                galeri: [
+                    {img: "https://images.unsplash.com/photo-1605330368165-22b9a10fc2b3?auto=format&fit=crop&w=400&q=80", title: "Tongkonan Lembah Tana Toraja"},
+                    {img: "https://images.unsplash.com/photo-1589156280159-27698a70f29e?auto=format&fit=crop&w=400&q=80", title: "Tenun Sutra Baju Bodo Bugis"},
+                    {img: "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=400&q=80", title: "Tari Pakarena Kipas Anggun"},
+                    {img: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=400&q=80", title: "Kolintang Kayu Minahasa"}
+                ]
+            },
+            "Papua": {
+                meta: "Mutiara Hitam Timur",
+                sejarah: "Memiliki kekayaan budaya kesukuan yang orisinal terisolasi pegunungan tinggi jayawijaya, melahirkan tradisi murni tanpa pengaruh luar.",
+                tradisi: "Upacara Bakar Batu (prosesi masak bersama seluruh desa menggunakan batu membara sebagai wujud syukur persaudaraan).",
+                pakaian: "Koteka (pria) dan Rok Sali (wanita) terbuat dari daun sagu kering terpilih.",
+                rumah: "Honai (rumah lingkaran beratap jerami tebal, menghalau dingin pegunungan Papua).",
+                filosofi: "Satu Tungku Tiga Batu (Konsep toleransi kerukunan antar umat manusia berlandaskan persaudaraan sejati).",
+                video: "https://www.youtube.com/embed/g2fJ4p5K7wY",
+                videoTitle: "Ritual Tari Perang Suku Asmat Papua",
+                laguUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-12.mp3",
+                laguJudul: "Sajojo / Yamko Rambe Yamko",
+                galeri: [
+                    {img: "https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&w=400&q=80", title: "Kompleks Perumahan Honai Bundar"},
+                    {img: "https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=400&q=80", title: "Riasan Alami Wajah Prajurit Papua"},
+                    {img: "https://images.unsplash.com/photo-1481214110143-ed630356e1bb?auto=format&fit=crop&w=400&q=80", title: "Tari Musyoh Sambutan Hangat"},
+                    {img: "https://images.unsplash.com/photo-1516280440614-37939bbacd6a?auto=format&fit=crop&w=400&q=80", title: "Tifa Perkusi Tabuh Papua"}
+                ]
+            }
+        };
+
+        let currentProvinsi = "Aceh";
+        const audioNode = document.getElementById('mainAudio');
+        let isPlaying = false;
+
+        // INITIALIZER RUN
+        window.onload = function() {
+            buildProvinceList();
+        };
+
+        // GENERATE DAFTAR PROVINSI DI SIDEBAR & MOBILE SELECT
+        function buildProvinceList() {
+            const provListContainer = document.getElementById('provList');
+            const mobileSelect = document.getElementById('mobileProvSelect');
+            
+            provListContainer.innerHTML = '';
+            mobileSelect.innerHTML = '';
+
+            Object.keys(budayaData).forEach((prov, index) => {
+                // Untuk Desktop Sidebar
+                const li = document.createElement('li');
+                li.className = `provinsi-item ${prov === currentProvinsi ? 'active' : ''}`;
+                li.innerText = prov;
+                li.setAttribute('onclick', `switchProvinsi("${prov}")`);
+                provListContainer.appendChild(li);
+
+                // Untuk Mobile Select Dropdown
+                const option = document.createElement('option');
+                option.value = prov;
+                option.innerText = prov;
+                mobileSelect.appendChild(option);
+            });
+
+            // Muat data awal pertama kali
+            loadProvinsiData(currentProvinsi);
+        }
+
+        // PENCARIAN PROVINSI (FILTER LOKAL)
+        function filterProvinces() {
+            const filter = document.getElementById('searchBar').value.toUpperCase();
+            const items = document.getElementsByClassName('provinsi-item');
+            
+            for (let i = 0; i < items.length; i++) {
+                let txtValue = items[i].textContent || items[i].innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    items[i].style.display = "";
+                } else {
+                    items[i].style.display = "none";
+                }
+            }
+        }
+
+        // NAVIGASI DARI HOME KE DASHBOARD EXPLORE
+        function startExplore() {
+            document.getElementById('explore-area').style.display = 'block';
+            document.getElementById('explore-area').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // AKSI JIKA KLIK KARTU POPULER DI LANDING
+        function selectPopular(provName) {
+            startExplore();
+            switchProvinsi(provName);
+            document.getElementById('mobileProvSelect').value = provName;
+        }
+
+        // LOGIC SWITCHING PROVINSI (UPDATE SELURUH ELEMENT KONTEN)
+        function switchProvinsi(provName) {
+            currentProvinsi = provName;
+            
+            // Hentikan musik yang sedang berjalan
+            audioNode.pause();
+            isPlaying = false;
+            document.getElementById('playBtn').innerText = "▶ Play";
+
+            // Update status aktif di list sidebar desktop
+            const items = document.getElementsByClassName('provinsi-item');
+            for(let item of items) {
+                if(item.innerText === provName) item.classList.add('active');
+                else item.classList.remove('active');
+            }
+
+            // Jalankan animasi transisi efek
+            const mainContent = document.querySelector('.main-content');
+            mainContent.style.animation = 'none';
+            mainContent.offsetHeight; /* trigger reflow */
+            mainContent.style.animation = 'fadeIn 0.6s ease-in-out';
+
+            loadProvinsiData(provName);
+        }
+
+        // RENDER DATA KE HTML
+        function loadProvinsiData(provName) {
+            const data = budayaData[provName];
+            if(!data) return;
+
+            document.getElementById('provTitle').innerText = provName;
+            document.getElementById('provMeta').innerText = `🇮🇩 Ragam Budaya: ${data.meta}`;
+            
+            // Text Artikel
+            document.getElementById('txt-sejarah').innerText = data.sejarah;
+            document.getElementById('txt-tradisi').innerText = data.tradisi;
+            document.getElementById('txt-pakaian').innerText = data.pakaian;
+            document.getElementById('txt-rumah').innerText = data.rumah;
+            document.getElementById('txt-filosofi').innerText = data.filosofi;
+
+            // Video Embed
+            document.getElementById('videoPlayer').src = data.video;
+            document.getElementById('videoDesc').innerText = data.videoTitle;
+
+            // Audio Player Setup
+            document.getElementById('audioTitle').innerText = data.laguJudul;
+            document.getElementById('audioOrigin').innerText = `Lagu Daerah Asal ${provName}`;
+            audioNode.src = data.laguUrl;
+
+            // Galeri Gambar Dinamis
+            const grid = document.getElementById('galleryGrid');
+            grid.innerHTML = '';
+            data.galeri.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'gallery-item';
+                div.setAttribute('onclick', `openLightbox("${item.img}", "${item.title} - Provinsi ${provName}")`);
+                
+                div.innerHTML = `
+                    <img src="${item.img}" alt="${item.title}">
+                    <div class="gallery-desc">${item.title}</div>
+                `;
+                grid.appendChild(div);
+            });
+        }
+
+        // TABS SWITCHING SYSTEM
+        function switchTab(evt, tabId) {
+            const contentPanes = document.getElementsByClassName('content-pane');
+            for (let pane of contentPanes) {
+                pane.classList.remove('active');
+            }
+
+            const tabBtns = document.getElementsByClassName('tab-btn');
+            for (let btn of tabBtns) {
+                btn.classList.remove('active');
+            }
+
+            document.getElementById(tabId).classList.add('active');
+            evt.currentTarget.classList.add('active');
+        }
+
+        // CUSTOM CONTROLLER INTERAKTIF AUDIO PLAYER
+        function toggleAudio() {
+            const playBtn = document.getElementById('playBtn');
+            if (!isPlaying) {
+                audioNode.play();
+                isPlaying = true;
+                playBtn.innerText = "⏸ Pause";
+                playBtn.style.backgroundColor = "var(--accent)";
+            } else {
+                audioNode.pause();
+                isPlaying = false;
+                playBtn.innerText = "▶ Play";
+                playBtn.style.backgroundColor = "var(--primary)";
+            }
+        }
+
+        // LIGHTBOX MODAL SYSTEM (KLIK GAMBAR PERBESAR)
+        function openLightbox(imgSrc, captionText) {
+            const modal = document.getElementById('lightboxModal');
+            document.getElementById('lightboxImg').src = imgSrc;
+            document.getElementById('lightboxCaption').innerText = captionText;
+            modal.style.display = "flex";
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightboxModal').style.display = "none";
+        }
+
+        // SWITCHER DARK MODE & LIGHT MODE SYSTEM
+        function toggleTheme() {
+            const currentTheme = document.body.getAttribute('data-theme');
+            const targetTheme = currentTheme === 'light' ? 'dark' : 'light';
+            document.body.setAttribute('data-theme', targetTheme);
+            
+            const btn = document.getElementById('themeBtn');
+            if(targetTheme === 'dark') {
+                btn.innerText = "☀️ Mode Terang";
+            } else {
+                btn.innerText = "🌙 Mode Gelap";
+            }
+        }
+    </script>
+</body>
+</html>
